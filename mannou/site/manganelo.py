@@ -44,7 +44,9 @@ class Manganelo(parser.Manga, domain='manganelo.com'):
     def get_chapter_images(chapter_url):
         soup = util.make_soup(chapter_url)
         image_tags = soup.select_one('#vungdoc').select('img')
+        images = []
         for tag in image_tags:
             source = tag['src']
             name = source.split('/')[-1]
-            yield parser.Image(name, source)
+            images.append(parser.Image(name, source))
+        return images
