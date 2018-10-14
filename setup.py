@@ -17,9 +17,9 @@ with open(here.joinpath('HISTORY.rst')) as history_file:
 
 requirements = ['requests>=2.19.0', 'beautifulsoup4>=4.6.0', 'tqdm>=4.26.0']
 
-setup_requirements = [ ]
+setup_requirements = ['pytest-runner']
 
-test_requirements = [ ]
+test_requirements = ['pytest']
 
 setup(
     author="Muhammad Adi Prasojo",
