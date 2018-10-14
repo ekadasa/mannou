@@ -1,8 +1,8 @@
-from .parser.manganelo import Manganelo
-from .parser.komikid import Komikid
-from .exception import ParserNotFoundError
 from pathlib import Path
-from . import util
+
+from . import util, exception
+from .site.komikid import Komikid
+from .site.manganelo import Manganelo
 
 
 class Mannou:
@@ -13,7 +13,11 @@ class Mannou:
 
     def __init__(self, url, parser=None):
         self.url = url
-        self.set_parser()
+        if parser is None:
+            self.set_parser()
+        else:
+            self.parser = parser
+
 
     def set_parser(self):
         for parser in self.parsers:
@@ -22,7 +26,9 @@ class Mannou:
 
     def parse(self):
         if self.parser is None:
-            raise ParserNotFoundError("There is no parser available. You can specify parser your self by set parser attr")
+            message = ("self.parser is None, you can specify parser "
+                       "by your self or use set_parser().")
+            raise exception.ParserNotFoundError(message)
 
         self.manga = self.parser(self.url)
 

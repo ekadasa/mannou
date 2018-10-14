@@ -12,10 +12,9 @@ from typing import NamedTuple
 
 from bs4 import BeautifulSoup
 
-from .. import util
-from ..exception import URLError
+from . import util, exception
 
-__all__ = ['Image', 'Chapter', 'MangaPage']
+__all__ = ['Image', 'Chapter', 'Manga']
 
 
 class Image(NamedTuple):
@@ -64,7 +63,8 @@ class Manga(ABC):
         valid_url = self.check_url(url)
 
         if not valid_url:
-            raise URLError(f"Url must started with http(s)://{self.domain}")
+            message = f"Url must started with http(s)://{self.domain}"
+            raise exception.URLError(message)
 
         self.url = url
         self.soup = util.make_soup(url)

@@ -164,7 +164,7 @@ def download(url, filepath):
     response = get_200(url, stream=True)
 
     # Total size in bytes.
-    total_size = int(response.headers.get('content-length', 0));
+    total_size = int(response.headers.get('content-length', 0))
     block_size = 1024
     wrote = 0
     with open(filepath, 'wb') as f:

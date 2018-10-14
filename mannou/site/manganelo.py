@@ -2,8 +2,7 @@
 
 """
 
-from . import parser
-from .. import util
+from .. import util, parser
 
 
 __all__ = ['Manganelo']

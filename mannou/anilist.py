@@ -2,6 +2,7 @@ import json
 
 import requests
 
+
 API_URL = 'https://graphql.anilist.co'
 
 QUERY = """

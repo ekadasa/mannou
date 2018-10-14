@@ -20,7 +20,7 @@ def info(search):
     Returns
     -------
     dict
-        Dictionary containing manga information.
+        Manga information.
 
     """
     manga_name = search
