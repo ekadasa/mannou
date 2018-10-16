@@ -1,2 +1,6 @@
+# -*- coding: utf-8 -*-
+
+import mannou
+
 def test_mannou():
-    assert 1 > 2
+    pass

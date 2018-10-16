@@ -34,7 +34,6 @@ def mkdir(dirpath):
     ----------
     dirpath : :obj:`pathlib.Path`
 
-
     Returns
     -------
     bool
