@@ -18,7 +18,7 @@ def test_mkdir():
         assert not created
     else:
         created = util.mkdir(test_dir)
-        created.rmdir()
+        util.rmdir()
         assert created
 
 def test_is_url():

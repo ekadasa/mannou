@@ -1,5 +1,9 @@
 Mannou - Manga Downloader
 =========================
+
+.. image:: https://img.shields.io/travis/borderlineargs/mannou.svg
+        :target: https://travis-ci.org/borderlineargs/mannou
+
 A manga downloader from various sites.
 
 Please remember this package still under development.
