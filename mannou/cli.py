@@ -1,12 +1,21 @@
 import argparse
-import urllib3
-import sys
-import textwrap
 import pathlib
+import sys
 
-from . import exception, mannou, anilist
+import urllib3
+
+from . import anilist, exception, mannou
+
 
 def main():
+    try:
+        cli()
+    except KeyboardInterrupt:
+        print('Program interrupted by User.')
+        sys.exit()
+
+
+def cli():
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     parser = argparse.ArgumentParser()
