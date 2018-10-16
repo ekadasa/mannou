@@ -62,4 +62,4 @@ class Mannou:
             for name, source in images:
                 image_path = chap_dir.joinpath(name)
                 print("Downloading", name)
-                util.download(source, image_path)
+                util.download(str(source), image_path)
