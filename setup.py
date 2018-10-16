@@ -9,10 +9,10 @@ from setuptools import find_packages, setup
 
 here = pathlib.Path(__file__).parent
 
-with open(str(here.joinpath('README.rst'))) as readme_file:
+with open(here.joinpath('README.rst')) as readme_file:
     readme = readme_file.read()
 
-with open(str(here.joinpath('HISTORY.rst'))) as history_file:
+with open(here.joinpath('HISTORY.rst')) as history_file:
     history = history_file.read()
 
 requirements = ['requests>=2.19.0', 'beautifulsoup4>=4.6.0', 'tqdm>=4.26.0']
@@ -29,7 +29,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
