@@ -2,13 +2,13 @@
 
 """Utility modules.
 
-This module contains miscellenous function used in every other packages and
+This module contains miscellaneous function used in every other packages and
 or modules.
 
 Notes
 -----
-    If module grow complex, there is a chance to group similiar function
-    in the new modules.
+If module grow complex, there is a chance to group similar function
+in the new modules.
 
 """
 
@@ -23,6 +23,16 @@ import tqdm
 
 from . import exception
 
+
+__all__ = [
+    'mkdir',
+    'clear_screen',
+    'is_url',
+    'get_200',
+    'make_soup',
+    'download',
+    'StatusCode'
+]
 
 def mkdir(dirpath):
     """Create a directory.
@@ -96,7 +106,7 @@ def get_200(url, max_retries=10, **options):
 
     Raises
     ------
-    exception.HTTPError
+    HTTPError
         If `max_retries` exceeded.
 
     """
@@ -153,11 +163,6 @@ def download(url, filepath):
         URL that you want to download.
     filepath : :obj:`str`
         Saved file location
-
-    Raises
-    ------
-    exception.HTTPError
-        From `mannou.util.get_200`
 
     """
     response = get_200(url, stream=True)

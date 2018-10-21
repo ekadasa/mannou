@@ -4,7 +4,8 @@
 
 """
 
-from .. import util, parser
+
+from .. import parser, util
 
 
 __all__ = ['Manganelo']
@@ -13,7 +14,7 @@ __all__ = ['Manganelo']
 class Manganelo(parser.Manga, domain='manganelo.com'):
     """Parser for https://manganelo.com
 
-    For further details, please read `Manga` documentation.
+    For further details, please read `mannou.parser.Manga` documentation.
 
     """
 
@@ -44,9 +45,11 @@ class Manganelo(parser.Manga, domain='manganelo.com'):
     def get_chapter_images(chapter_url):
         soup = util.make_soup(chapter_url)
         image_tags = soup.select_one('#vungdoc').select('img')
+
         images = []
         for tag in image_tags:
             source = tag['src']
             name = source.split('/')[-1]
             images.append(parser.Image(name, source))
+
         return images

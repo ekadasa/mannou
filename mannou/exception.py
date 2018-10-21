@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from urllib.error import URLError, HTTPError
+"""Main exception module.
+
+Every exception must be listed in here.
+
+"""
+
+from urllib.error import HTTPError, URLError
+
 
 class ParserNotFoundError(Exception):
-    pass
+    """Raise when url there is no parser found in `mannou.Mannou.parsers`.
+
+    """

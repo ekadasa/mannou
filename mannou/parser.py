@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Main module for parsing sites
+"""Parser module for manga website.
 
-This module contains class that used for parsing sites.
+This module is used for parsing manga website.
 
 """
 
@@ -12,7 +12,8 @@ from typing import NamedTuple
 
 from bs4 import BeautifulSoup
 
-from . import util, exception
+from . import exception, util
+
 
 __all__ = ['Image', 'Chapter', 'Manga']
 
@@ -20,9 +21,12 @@ __all__ = ['Image', 'Chapter', 'Manga']
 class Image(NamedTuple):
     """Represent an image.
 
-    Args:
-        name (str): The Image name with extension.
-        url (str): The source of image.
+    Parameters
+    ----------
+    name : str
+        The image name with extension.
+    url : str
+        The image source.
 
     """
     name: str
@@ -32,11 +36,14 @@ class Image(NamedTuple):
 class Chapter(NamedTuple):
     """Represent a chapter.
 
-    Args:
-        number (str): The chapter number.
-            str is used over int due there is some 'decimal' chapter, like 10.5.
-            Why do not use float? It is weird to see chapter 1.0, I think.
-        url (str): The url of specific chapter.
+    Parameters
+    ----------
+    number : str
+        The chapter number.
+        str is used over int due there is some 'decimal' chapter, like 10.5.
+        Why do not use float? It is weird to see chapter 1.0, I think.
+    url : str
+        The url of specific chapter.
 
     """
     number: str
@@ -46,16 +53,26 @@ class Manga(ABC):
     """An abstract base class for manga site parser.
 
     Every parser class must inherit this class to ensure that every
-    parser has the same functionality. The subclass is also must has
+    parser has the same functionality. The subclass also must has
     `domain` attribute to check whether `url` argument is valid url
     or not.
 
-    Attributes:
-        domain (str): Domain of the site
+    Attributes
+    ----------
+    domain : str
+        Domain of the site
 
-    Args:
-        url (str): Url of the manga.
-        soup (BeautifulSoup): `BeautifulSoup` object from url.
+    Parameters
+    ----------
+    url : str
+        Url of the manga.
+    soup : :obj:`BeautifulSoup`
+        `BeautifulSoup` object from url.
+
+    Raises
+    ------
+    URLError
+        If not `url` is not a valid url.
 
     """
 
@@ -72,12 +89,17 @@ class Manga(ABC):
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.url}')"
 
-    @classmethod
-    def check_url(cls, url):
-        return False if url.find(cls.domain) == -1 else True
-
     def __str__(self):
         return self.title
+
+    def __getitem__(self, key):
+        return self.chapters[key]
+
+    def __setitem__(self, key, value):
+        self.chapters[key] = value
+
+    def __delitem__(self, key):
+        del self.chapters[key]
 
     def __iter__(self):
         for chapter in self.chapters:
@@ -97,7 +119,7 @@ class Manga(ABC):
     @property
     @abstractmethod
     def title(self):
-        """str: Get the title of manga
+        """str: The title of manga
 
         """
         pass
@@ -105,7 +127,7 @@ class Manga(ABC):
     @property
     @abstractmethod
     def chapters(self):
-        """list(Chapter): Get chapter number and url in manga
+        """:obj:`list` of :obj:`mannou.parser.Chapter`: Available chapters.
 
         """
         pass
@@ -113,11 +135,33 @@ class Manga(ABC):
 
     @abstractmethod
     def get_chapter_images(self, chapter_url):
-        """list(Image): Get image name and url in chapter
+        """Parse `chapter_url`.
+
+        Returns
+        -------
+        :obj:`list` of :obj: `mannou.parser.Image`
+            List of images name and source location.
 
         You can override this method as static method.
         """
         pass
+
+    @classmethod
+    def check_url(cls, url):
+        """Check whether `url` is actually from `self.domain` or not.
+
+        Parameters
+        ----------
+        url : str
+            URL that you want to check.
+
+        Returns
+        -------
+        bool
+            True if it is url from `self.domain`, False otherwise.
+
+        """
+        return False if url.find(cls.domain) == -1 else True
 
     def filter_chapters(self, start=0, stop=None):
         """Filter chapter in manga.
@@ -125,9 +169,17 @@ class Manga(ABC):
         This is general algorithm for class parser that follow the rules.
         You may or may not override this method.
 
-        Args:
-            start (int, float): From what chapter?
-            stop (int, float, optional): What chapter to stop? default to None.
+        Parameters
+        ----------
+        start : int, float, optional
+            From what chapter? Default to 0.
+        stop : int, float, optional
+            What chapter to stop? default to None.
+
+        Returns
+        -------
+        :obj:`list` of :obj:`mannou.parser.Chapter`
+            Filtered chapters.
 
         """
         last_chapter = float(self.chapters[-1].number)

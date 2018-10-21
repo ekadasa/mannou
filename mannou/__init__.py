@@ -29,22 +29,20 @@
 Mannou Manga Downloader
 =======================
 
-Mannou is a manga downloader, written in Python, for downloading manga
+Mannou is a manga downloader  for downloading manga
 from various sites. Basic usage::
 
     >>> import mannou
-    >>> manga = mannou.get('https://www.mangatown.com/manga/girls_panzer/')
-    >>> manga.title
-    'Girls & Panzer'
-    >>> manga.chapters
-    [ChapterType('1', 'https://www.mangatown.com/manga/girls_panzer/c001/'],
-     ...,
-    ChapterType('21', 'https://www.mangatown.com/manga/girls_panzer/c021/')]
-    >>> len(manga)
-    21
-    >>> manga.download() # download all manga and save it to default location
-    >>> manga.download(start='1', end='1') # Download only chapter 1
-    >>> manga.download(start='1', end='3') # Download only chapter 1 to 3
+    >>> url = 'https://manganelo.com/manga/aiura'
+    >>> manga = mannou.get(url)
+    >>> str(manga) # or manga.title
+    Aiura
+    >>> manga[0] # or manga.chapters[0]
+    Chapter(number='1', url='https://manganelo.com/chapter/aiura/chapter_1')
+    >>> images = manga.get_chapter_images(manga[0].url)
+    >>> images[0]
+    Image(name='1.jpg', url='http://s8.mkklcdn.com/mangakakalot/a1/aiura/chapter_1/1.jpg')
+    >>> mannou.download(url, start=1, end=5) # Download every chapters 1 until 5 in 'Aiura' and save it to default location (~/Manga or %USERPROFILE%\Manga)
 
 
 The other methods and properties are supported. Full documentation
@@ -53,5 +51,6 @@ is at <https://mannou.readthedocs.io>.
 """
 
 
+from .anilist import AniList
+from .api import download, get, info
 from .mannou import Mannou
-from .api import info, get, download

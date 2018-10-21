@@ -1,3 +1,30 @@
+# -*- coding: utf-8 -*-
+
+"""Main `Mannou` API.
+
+A **command line interface** for `mannou`. This command::
+
+    $ mannou
+
+is as same as::
+
+    $ python3 -m mannou
+
+Example
+-------
+For downloading manga from *'https://manganelo.com/manga/aiura'*,
+from chapter 2 to 3, you can type::
+
+    $ mannou https://manganelo.com/manga/aiura --start 2 --end 3
+
+
+For further feature, please type::
+
+    $ mannou --help
+
+"""
+
+
 import argparse
 import pathlib
 import sys
@@ -7,15 +34,28 @@ import urllib3
 from . import anilist, exception, mannou
 
 
+__all__ = ['main', 'cli']
+
 def main():
+    """Main function.
+
+    This function will run if you type::
+
+        $ mannou
+
+    in your terminal.
+
+    """
     try:
         cli()
     except KeyboardInterrupt:
         print('Program interrupted by User.')
         sys.exit()
 
-
 def cli():
+    """Main cli function.
+
+    """
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     parser = argparse.ArgumentParser()
@@ -41,7 +81,7 @@ def cli():
         manga.download(start=args.start, end=args.end)
 
     else:
-        info = anilist.MangaInfo(manga.manga.title).info()
+        info = anilist.AniList(manga.manga.title).info()
         description = info['description'].replace('<br>', '')
         detailed_info = f"""
         ID

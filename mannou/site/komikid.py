@@ -4,7 +4,8 @@
 
 """
 
-from .. import util, parser
+
+from .. import parser, util
 
 
 __all__ = ['Komikid']
@@ -19,7 +20,7 @@ def _get_number_from_url(chapter_url):
 class Komikid(parser.Manga, domain='komikid.com'):
     """Parser for http://komikid.com
 
-    For further details, please read `Manga` documentation.
+    For further details, please read `mannou.parser.Manga` documentation.
 
     """
 
@@ -43,9 +44,11 @@ class Komikid(parser.Manga, domain='komikid.com'):
     def get_chapter_images(chapter_url):
         soup = util.make_soup(chapter_url)
         image_tags = soup.select('#all > img')
+
         images = []
         for tag in image_tags:
             source = tag['data-src'].strip()
             name = source.split('/')[-1]
             images.append(parser.Image(name, source))
+
         return images
