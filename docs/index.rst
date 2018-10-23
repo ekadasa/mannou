@@ -29,29 +29,36 @@ You can also use **Mannou** as library:
 .. code-block:: python
 
     >>> import mannou
-    >>> manga = mannou.get('https://manganelo.com/manga/aiura')
-    >>> manga.title
+    >>> url = 'https://manganelo.com/manga/aiura'
+    >>> manga = mannou.get(url)
+    >>> str(manga) # or manga.title
     Aiura
-    >>> manga.chapter[0]
+    >>> manga[0] # or manga.chapters[0]
     Chapter(number='1', url='https://manganelo.com/chapter/aiura/chapter_1')
-    >>> images = manga.get_chapter_images(manga.chapter[0].url)
+    >>> images = manga.get_chapter_images(manga[0].url)
     >>> images[0]
     Image(name='1.jpg', url='http://s8.mkklcdn.com/mangakakalot/a1/aiura/chapter_1/1.jpg')
+    >>> mannou.download(url, start=1, end=5) # Download every chapters 1 until 5 in 'Aiura' and save it to default location (~/Manga or %USERPROFILE%\Manga)
 
 
 Features
 --------
 
 * Get manga info in-depth (using Anilist_ API)
-* Download some or all chapters in certain manga.
+* Download some or all chapters in certain manga
+
+
+Website Support
+---------------
+
+* `Manganelo <https://manganelo.com>`_ (English Language)
+* `Komikid <http://komikid.com>`_ (Bahasa Indonesia)
 
 
 The User Guide
 --------------
 
-This part of the documentation, which is mostly prose, begins with some
-background information about Requests, then focuses on step-by-step
-instructions for getting the most out of Requests.
+This guide explain how you can use **Mannou**.
 
 .. toctree::
    :maxdepth: 2
@@ -63,9 +70,19 @@ instructions for getting the most out of Requests.
    user/advanced
 
 
------------------------------------------------------------------------------------------------
+Source Documentation
+--------------------
 
-The end.
+This section provides source documentation.
+
+.. toctree::
+    :maxdepth: 2
+
+    api/mannou
+    api/mannou.site
+    api/modules
+
+-----------------------------------------------------------------------------------------------
 
 .. _AniList: https://anilist.co/
 
