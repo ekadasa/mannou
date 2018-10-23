@@ -2,17 +2,14 @@
 
 """The setup script."""
 
-import pathlib
 
 from setuptools import find_packages, setup
 
 
-here = pathlib.Path(__file__).parent
-
-with open(here.joinpath('README.rst')) as readme_file:
+with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open(here.joinpath('HISTORY.rst')) as history_file:
+with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = ['requests>=2.19.0', 'beautifulsoup4>=4.6.0', 'tqdm>=4.26.0']
