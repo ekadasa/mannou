@@ -27,7 +27,7 @@ from . import anilist, mannou, util
 
 __all__ = ['info', 'get', 'download']
 
-def info(search):
+def info(search, parser=None):
     """Get an anime info.
 
     It can search by url or title of the manga.
@@ -50,7 +50,7 @@ def info(search):
     an_url = util.is_url(search)
 
     if an_url:
-        manga = get(search)
+        manga = get(search, parser=parser)
         manga_name = manga.title
 
     info = anilist.AniList(manga_name)
