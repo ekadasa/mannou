@@ -37,7 +37,7 @@ __all__ = [
 def mkdir(dirpath):
     """Create a directory.
 
-    Only create directory if ``dipath`` is not exists.
+    Only create directory if ``dirpath`` is not exists.
     ``dirpath`` must be an object from ``pathlib.Path``
 
     Parameters
