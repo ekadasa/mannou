@@ -12,8 +12,6 @@ See Also
 """
 
 
-import json
-
 import requests
 
 
@@ -86,7 +84,7 @@ class AniList:
             }
         }
         response = requests.post(self.api_url, json=data)
-        return response
+        return response.json()
 
     def info(self):
         """Get response in dictionary.
@@ -98,5 +96,4 @@ class AniList:
 
         """
         response = self.json()
-        load_data = json.loads(response.text)
-        return load_data['data']['Media']
+        return response['data']['Media']
