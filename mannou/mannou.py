@@ -99,6 +99,11 @@ class Mannou:
         end : int, float, optional
             The last chapter that you want to download, default to None.
 
+        Returns
+        -------
+        :obj:`pathlib.Path`
+            Saved manga directory if succeeded.
+
         """
         util.mkdir(self.root)
 
@@ -128,3 +133,5 @@ class Mannou:
                 image_path = chap_dir.joinpath(name)
                 print("Downloading", name)
                 util.download(source, image_path)
+
+        return manga_dir
