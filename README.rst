@@ -1,7 +1,7 @@
 Mannou - Manga Downloader
 #########################
 
-|pypi| |pyver| |travis|
+|pypi| |pyver| |travis| |docs|
 
 A manga downloader from various sites.
 
@@ -105,3 +105,7 @@ Credits
 .. |pyver| image:: https://img.shields.io/pypi/pyversions/mannou.svg
     :target: https://pypi.org/project/mannou/
     :alt: Python supported version.
+
+.. |docs| image:: https://readthedocs.org/projects/mannou/badge/
+    :target: https://mannou.readthedocs.io/
+    :alt: Documentation.
