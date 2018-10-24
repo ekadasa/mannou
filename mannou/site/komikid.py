@@ -48,7 +48,7 @@ class Komikid(parser.Manga, domain='komikid.com'):
         images = []
         for tag in image_tags:
             source = tag['data-src'].strip()
-            name = source.split('/')[-1]
+            name = _get_number_from_url(source)
             images.append(parser.Image(name, source))
 
         return images
