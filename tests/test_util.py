@@ -6,8 +6,6 @@
 
 import pathlib
 
-import pytest
-
 from mannou import util
 
 def test_mkdir():

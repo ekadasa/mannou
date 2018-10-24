@@ -48,5 +48,5 @@ def test_download():
     except AssertionError as err:
         print(err)
         raise AssertionError
-    else:
+    finally:
         shutil.rmtree(dest)
