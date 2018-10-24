@@ -42,7 +42,7 @@ from various sites. Basic usage::
     >>> images = manga.get_chapter_images(manga[0].url)
     >>> images[0]
     Image(name='1.jpg', url='http://s8.mkklcdn.com/mangakakalot/a1/aiura/chapter_1/1.jpg')
-    >>> mannou.download(url, start=1, end=5) # Download every chapters 1 until 5 in 'Aiura' and save it to default location (~/Manga or %USERPROFILE%\Manga)
+    >>> mannou.download(url, start=1, end=5) # Download every chapters 1 until 5 in 'Aiura' and save it to default location (~/Manga or %USERPROFILE%\\Manga)
 
 
 The other methods and properties are supported. Full documentation
